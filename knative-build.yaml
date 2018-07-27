@@ -1,0 +1,16 @@
+apiVersion: build.knative.dev/v1alpha1
+kind: Build
+metadata:
+  name: sofa-knative-build
+spec:
+  source:
+    git:
+      url: https://github.com/khotyn/sofa-knative-demo.git
+      revision: master
+  steps:
+  - name: maven-build
+    image: maven:3.5.4
+    args: ['mvn', 'install']
+  - name: docker-build
+    image: docker:latest
+    args: ['docker', 'build', '--build-arg', 'JAR_FILE=./target/sofa-knative-0.0.1-SNAPSHOT.jar', '.', '-t', 'knative-sofa']
