@@ -13,4 +13,4 @@ spec:
     args: ['mvn', 'install']
   - name: docker-build
     image: docker:latest
-    args: ['docker', 'build', '--build-arg', 'JAR_FILE=./target/sofa-knative-0.0.1-SNAPSHOT.jar', '.', '-t', 'knative-sofa']
+    args: ['docker', 'daemon', '&&', 'docker', 'build', '.', '-t', 'knative-sofa']
